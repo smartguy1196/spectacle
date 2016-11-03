@@ -13,14 +13,16 @@ class ViewMock extends Component {
   }
 }
 
-describe("Transitionable", () => {
+describe("@renderTransition", () => {
+  it("should wrap the view component in a VictoryAnimation component", () => {
+    const wrapper = shallow(<ViewMock transition={[]} />);
+    expect(wrapper.type()).toBe(VictoryAnimation);
+  });
+});
+
+describe("@Transitionable", () => {
   afterEach(() => {
     jest.clearAllMocks();
-  });
-
-  it("should wrap the view component in a VictoryAnimation component", () => {
-    const wrapper = shallow(<ViewMock transition={[ "fade" ]} />);
-    expect(wrapper.type()).toBe(VictoryAnimation);
   });
 
   it("should add ReactCSSTransitionGroup lifecycle functions to the decorated class.", () => {
@@ -30,7 +32,7 @@ describe("Transitionable", () => {
   });
 
   it("should call getTransitionStyles to get the transition styles when rendered.", () => {
-    const wrapper = mount(<ViewMock transition={[ "fade" ]} />);
+    const wrapper = mount(<ViewMock transition={[]} />);
     wrapper.instance().getTransitionStyles = jest.fn();
     wrapper.update();
     expect(wrapper.instance().getTransitionStyles).toHaveBeenCalled();

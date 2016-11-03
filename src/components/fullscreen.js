@@ -3,6 +3,10 @@ import Radium from "radium";
 
 @Radium
 export default class Fullscreen extends Component {
+  constructor() {
+    super(...arguments);
+    this.toggleFullScreen = this.toggleFullScreen.bind(this);
+  }
   toggleFullScreen() {
     if (!document.fullscreenElement &&
         !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
@@ -39,7 +43,7 @@ export default class Fullscreen extends Component {
     };
     return (
       <svg
-        onClick={this.toggleFullScreen.bind(this)}
+        onClick={this.toggleFullScreen}
         style={[styles, this.context.styles.fullscreen]}
         width="30px"
         height="30px"
